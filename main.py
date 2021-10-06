@@ -44,19 +44,14 @@ class Node:
         pygame.draw.rect(screen, self.color, (self.row * cell_size + 2, self.column * cell_size + 2, cell_size - 2, cell_size - 2))
 
     def Set_Neighbours(self, NodeList, rows, columns):
-        print(self.row, self.column)
         if self.column < columns-1 and NodeList[self.row][self.column + 1].visited == False:
             self.neighbours.append(NodeList[self.row][self.column + 1])
-            print("pridan vpravo")
         if self.column > 0 and NodeList[self.row][self.column - 1].visited == False:
             self.neighbours.append(NodeList[self.row][self.column - 1])
-            print("pridan vlevo")
         if self.row > 0 and NodeList[self.row - 1][self.column].visited == False:
             self.neighbours.append(NodeList[self.row - 1][self.column])
-            print("pridan nahoru")
         if self.row < rows-1 and NodeList[self.row + 1][self.column].visited == False:
             self.neighbours.append(NodeList[self.row + 1][self.column])
-            print("pridan dolu")
 
 def Init_background():
     NodeList = []
@@ -123,7 +118,6 @@ def BreadthFirstSearch(NodeList, row, column):
     while Stack:
         current.Set_Neighbours(NodeList, rows, columns)
         i += 1
-        print(i)
         if len(Stack) > 0 and current != end:
             for node in current.neighbours:
                 Stack.append(node)
@@ -147,7 +141,6 @@ def DepthFirstSearch(NodeList, row, column):
     while Queue:
         current.Set_Neighbours(NodeList, rows, columns)
         i += 1
-        print(i)
         if len(Queue) > 0 and current != end:
             for node in current.neighbours:
                 Queue.append(node)
